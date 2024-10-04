@@ -15,14 +15,10 @@ import Rating from '@mui/material/Rating';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react'
 import { Divider } from '@mui/material'
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
+
 
 function FormRegistro() {
-  const [data, setData] = useState({ name: '', sname: '', age: '', radgroup: useState('femenino'), lang: useState('')})
+  const [data, setData] = useState({ name: '', sname: '', age: '', radgroup: useState(0)})
   const [value, setValue] = React.useState(0);
 
   const handleSubmit = (e) => {
@@ -53,20 +49,14 @@ function FormRegistro() {
     })
     //console.log(data)
   }
-  const handleRadgroup = (e) => {
+  const handleRadgroup = (event) => {
     setData({
       ...data,
-      radgroup: e.target.value
+      radgroup: event.target.value
     })
-  };
+    };
 
-const handleSelect = (e) => {
-  setData({
-    ...data,
-    lang: e.target.value
-    
-  })
-}
+
 
 
   const handleClear = () => {
@@ -74,9 +64,8 @@ const handleSelect = (e) => {
       ...data,
       name: "",
       sname: "",
-      age: "",
-      radgroup: '',
-      lang: '',
+      age:"",
+      radgroup:''
     })
     setValue(0)
 
@@ -117,9 +106,8 @@ const handleSelect = (e) => {
             <Grid size={2}>
               <TextField
                 required
-                label='Edad'
+                label='edad'
                 variant='outlined'
-                type='number'
                 fullWidth
                 value={data.age}
                 onChange={handleChangeAge}
@@ -146,35 +134,22 @@ const handleSelect = (e) => {
             </Grid>
 
             <Grid size={7} sx={{ display: "flex", marginLeft: '0' }}>
-            <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Lenguaje de Programación</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={data.lang}
-          label="Lenguaje de Programación"
-          onChange={handleSelect}
-        >
-          <MenuItem value={1}>Python</MenuItem>
-          <MenuItem value={2}>Java</MenuItem>
-          <MenuItem value={3}>JavaScript</MenuItem>
-        </Select>
-      </FormControl>
+              HOLA
             </Grid>
             {/* FIN SEGUNDA LÍNEA GRID */}
             <Grid size={12}>
-              <Divider />
+    <Divider/>
 
             </Grid>
-            <Grid size={12} textAlign={'left'} display={'flex'}>
-              <Rating
+            <Grid size={12} textAlign={'left'}  display={'flex'}>
+            <Rating
                 name="simple-controlled"
                 value={value}
                 onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
               />
-              <Typography sx={{ display: 'inline', marginLeft:"9px" }} >Puntúa esta encuesta</Typography>
+              <Typography  sx={{display:'inline'}} > Puntúa esta encuesta</Typography>
 
             </Grid>
 
@@ -184,13 +159,13 @@ const handleSelect = (e) => {
 
 
             <Grid size={6}>
-              <Button type='submit' variant='contained' fullWidth>Registrar</Button>
+              <Button type='submit' variant='outlined' fullWidth color='gray'>Registrar</Button>
             </Grid>
             <Grid size={6}>
-              <Button onClick={handleClear} variant='outlined' fullWidth color='error'>Limpiar</Button>
+              <Button onClick={handleClear} variant='outlined' fullWidth color='gray'>Limpiar</Button>
             </Grid>
           </Grid>
-        </Box>
+        </Box>  
       </Paper>
     </Container >
 
