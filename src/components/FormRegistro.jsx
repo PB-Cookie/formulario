@@ -22,6 +22,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { pink } from '@mui/material/colors';
 
 function FormRegistro() {
   const [data, setData] = useState({
@@ -76,10 +77,10 @@ function FormRegistro() {
       lang: e.target.value,
     });
   };
-  const handleRating = (e) => {
+  const handleRating = (e, newValue) => {
     setData({
       ...data,
-      rating: e.target.value,
+      rating: newValue,
     });
   };
   
@@ -91,8 +92,8 @@ function FormRegistro() {
       age: "",
       radgroup: "",
       lang: "",
+      rating: 0
     });
-    setRating(0);
   };
 
   const handleDialog = () => {
@@ -103,14 +104,20 @@ function FormRegistro() {
   };
 
   return (
-    <Container>
+    <Container
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh", // Ocupa el 100% del viewport en altura
+    }}>
+      
       <Paper
         elevation={24}
         square={false}
         sx={{
           textAlign: "center",
           minHeight: "500px",
-          mt: "10%",
           padding: "20px",
         }}
       >
@@ -123,9 +130,9 @@ function FormRegistro() {
           FORMULARIO
         </Typography>
         <Box component="form" onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={{xs:0.5,sm:1, md:1.5 ,xl:2}}>
             {/* PRIMERA LÍNEA GRID */}
-            <Grid size={5}>
+            <Grid size={{xs:12,md:6 ,xl:5}}>
               <TextField
                 required
                 label="Nombre"
@@ -135,7 +142,7 @@ function FormRegistro() {
                 onChange={handleChangeName}
               />
             </Grid>
-            <Grid size={5}>
+            <Grid size={{xs:12,md:6 ,xl:5}}>
               <TextField
                 label="Apellido"
                 variant="outlined"
@@ -145,7 +152,7 @@ function FormRegistro() {
                 required 
               />
             </Grid>
-            <Grid size={2}>
+            <Grid size={{xs:12,md:6 ,xl:2}}>
               <TextField
                 required
                 label="Edad"
@@ -158,9 +165,10 @@ function FormRegistro() {
             </Grid>
             {/* FIN PRIMERA LÍNEA GRID */}
 
-            <Grid size={5}>
+            <Grid size={{xs:12,md:6 ,xl:5}}>
+
               <FormControl>
-                <FormLabel id="radioGroup">Género</FormLabel>
+                <FormLabel id="radioGroup" sx={{ display: { xs: 'none', md: 'block' } }}>Género</FormLabel>
                 <RadioGroup 
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
@@ -169,7 +177,6 @@ function FormRegistro() {
                   onChange={handleRadgroup}
                 >
                   <FormControlLabel
-                  
                     value="femenino"
                     control={<Radio required/>}
                     label="Female"
@@ -188,7 +195,7 @@ function FormRegistro() {
               </FormControl>
             </Grid>
 
-            <Grid size={7} sx={{ display: "flex", marginLeft: "0" }}>
+            <Grid size={{xs:12,md:12 ,xl:7}} sx={{ display: "flex", marginLeft: "0" }}>
               <FormControl fullWidth required>
                 <InputLabel >
                   Lenguaje de Programación
@@ -221,12 +228,13 @@ function FormRegistro() {
             <Grid size={12} textAlign={"left"}>
               <FormControlLabel
                 required
-                control={<Checkbox />}
+                
+                control={<Checkbox color='secondary'/>}
                 label="He leído los términos y condiciones."
               />
             </Grid>
 
-            <Grid size={6}>
+            <Grid size={{xs:12,md:6 ,xl:6}}>
               <Button
                 type="submit"
                 variant="contained"
@@ -236,7 +244,8 @@ function FormRegistro() {
                 Enviar
               </Button>
             </Grid>
-            <Grid size={6}>
+            <Grid size={{xs:12,md:6 ,xl:6}}>
+
               <Button onClick={handleClear} variant="outlined" fullWidth>
                 Limpiar
               </Button>
